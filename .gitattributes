@@ -1,0 +1,14 @@
+*.doc	diff=pandoc
+*.DOC	diff=pandoc
+*.docx	diff=pandoc
+*.DOCX	diff=pandoc
+*.docm	diff=pandoc
+*.DOCM	diff=pandoc
+*.dot	diff=pandoc
+*.DOT	diff=pandoc
+*.dotm	diff=pandoc
+*.DOTM	diff=pandoc
+*.pdf	diff=astextplain
+*.PDF	diff=astextplain
+*.rtf	diff=astextplain
+*.RTF	diff=astextplain
