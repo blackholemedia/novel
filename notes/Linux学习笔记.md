@@ -37,14 +37,19 @@ Content
 ### 帮助文档基本说明  
 
 1. [] 可选内容  
-
 2. <> 必选内容
-
 3. a | b 二选一
-
 4. { } 分组
-
 5. ... 同一内容可出现多次
+
+Some options will have a limited list of choices. A list of choices will be comma seperated and put between braces.
+
+```shell
+{choice1,choice2}
+{yes,no}
+```
+
+
 
 ### whatis  
 
