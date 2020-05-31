@@ -1,8 +1,5 @@
 from custom_profiler.custom_profiler import custom_line_profiler
 
-BLANK = ' ' * 4
-SLASH = '-' * 4
-
 
 class Tree(object):
 
@@ -60,34 +57,6 @@ class BinarySearchTree(object):
             print('The tree is empty, nothing to do')
             return
         return self._find_min(self.root)
-
-    def _reverse_infix_print(self, node, depth, on_right=True):
-        if not node:
-            return None
-        else:
-            self._reverse_infix_print(node.right, depth + 1)
-            if on_right:
-                if node.right or node.left:
-                    print(BLANK * depth + str(node) + SLASH)
-                else:
-                    print(BLANK * depth + str(node))
-                # print((BLANK * depth + '|\n') * 2 + BLANK * depth + '|')
-            else:
-                print((BLANK * (depth - 1) + '|' + BLANK + '|\n') * 2 + (BLANK * (depth - 1) + '|' + BLANK + '|'))
-                # print((' ' * 4 * depth + '|\n') * 2 + ' ' * 4 * depth + '|')
-                if node.right or node.left:
-                    print(BLANK * depth + str(node) + SLASH)
-                else:
-                    print(BLANK * depth + str(node))
-            self._reverse_infix_print(node.left, depth + 1, on_right=False)
-
-    def reverse_infix_print(self):
-        if not self.root:
-            print('The tree is EMPTY')
-        else:
-            self._reverse_infix_print(self.root.right, depth=1)
-            print(str(self.root) + '-' * 4)
-            self._reverse_infix_print(self.root.left, depth=1, on_right=False)
 
     def _insert(self, node, value):
         if node.value == value:
