@@ -12,18 +12,20 @@ class Sorting(object):
         self.source_list = random.sample(range(start, end), num)
         if print_result:
             print(self.source_list)
+            print(sorted(self.source_list))
 
     @custom_line_profiler
     def insert_sort(self):
         for i in range(1, len(self.source_list)):
             tmp = self.source_list[i]
             for j in range(0, i):
-                if self.source_list[i] < self.source_list[j]:
-                    self.source_list = self.source_list[:j] + [tmp] + self.source_list[j:] + self.source_list[i:]
-                    pass  # todo
+                if tmp < self.source_list[j]:
+                    self.source_list = self.source_list[:j] + [tmp] + self.source_list[j:i] + self.source_list[(i + 1):]
+                    break
 
 
 if __name__ == '__main__':
     sorting = Sorting()
-    sorting.generate_random_list(num=20, print_result=True)
+    sorting.generate_random_list(num=5000)
     sorting.insert_sort()
+    # print(sorting.source_list)
