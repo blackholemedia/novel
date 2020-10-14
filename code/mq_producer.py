@@ -7,6 +7,8 @@ class Producer(object):
         self.user = 'aqumon'
         self.pw = 'aqumon2046'
         self.connection = self.get_connection()
+        self.channel = self.connection.channel()  # 获得channel
+        self.exchange = self.channel.exchange_declare('logs', exchange_type='fanout')
 
     def get_connection(self, host='192.168.200.27'):
         # endpoint = 'amqp://aqumon:aqumon2046@192.168.200.27:5762/%2F'
@@ -18,16 +20,23 @@ class Producer(object):
         self.connection.close()  # 关闭 同时flush
 
     def send_message(self):
-        channel = self.connection.channel()  # 获得channel
-        channel.queue_declare(queue='hello')  # 在RabbitMQ中创建hello这个队列
+        self.channel.queue_declare(queue='hello')  # 在RabbitMQ中创建hello这个队列
         for i in range(10):
             msg = 'The {} message'.format(str(i + 1))
-            channel.basic_publish(exchange='',  # 使用默认的exchange来发送消息到队列
-                                  routing_key='hello',
-                                  body=msg)  # 消息内容
+            self.channel.basic_publish(exchange='',
+                                       routing_key='hello',
+                                       body=msg)
+
+    def send_exchange(self):
+        for i in range(100):
+            msg = 'The {} message'.format(str(i + 1))
+            self.channel.basic_publish(exchange='logs',
+                                       routing_key='',
+                                       body=msg)
 
 
 if __name__ == '__main__':
     producer = Producer()
-    producer.send_message()
+    # producer.send_message()
+    producer.send_exchange()
     producer.close_connection()
