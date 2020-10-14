@@ -41,12 +41,24 @@ class Consumer(object):
                                    on_message_callback=self.call_back)  # 消息内容
         self.channel.start_consuming()
 
+    def consume_by_key(self, i):
+        result = self.channel.queue_declare(queue='', exclusive=True)
+        self.channel.queue_bind(exchange='direct_logs',
+                                queue=result.method.queue,
+                                routing_key=i)
+        self.channel.basic_consume(queue=result.method.queue,
+                                   auto_ack=True,
+                                   on_message_callback=self.call_back)  # 消息内容
+        self.channel.start_consuming()
+
 
 if __name__ == '__main__':
     try:
+        severity = sys.argv[1] if len(sys.argv) > 1 else '0'
         consumer = Consumer()
         # consumer.consume_message()
-        consumer.consume_by_exchange()
+        # consumer.consume_by_exchange()
+        consumer.consume_by_key(severity)
     except KeyboardInterrupt:
         print('Interrupted')
         try:

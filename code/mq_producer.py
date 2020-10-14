@@ -8,7 +8,8 @@ class Producer(object):
         self.pw = 'aqumon2046'
         self.connection = self.get_connection()
         self.channel = self.connection.channel()  # 获得channel
-        self.exchange = self.channel.exchange_declare('logs', exchange_type='fanout')
+        # self.exchange = self.channel.exchange_declare('logs', exchange_type='fanout')
+        self.exchange = self.channel.exchange_declare('direct_logs', exchange_type='direct')
 
     def get_connection(self, host='192.168.200.27'):
         # endpoint = 'amqp://aqumon:aqumon2046@192.168.200.27:5762/%2F'
@@ -34,9 +35,17 @@ class Producer(object):
                                        routing_key='',
                                        body=msg)
 
+    def send_by_key(self):
+        for i in range(50):
+            msg = 'The {} message'.format(str(i + 1))
+            self.channel.basic_publish(exchange='direct_logs',
+                                       routing_key=str(i % 3),
+                                       body=msg)
+
 
 if __name__ == '__main__':
     producer = Producer()
     # producer.send_message()
-    producer.send_exchange()
+    # producer.send_exchange()
+    producer.send_by_key()
     producer.close_connection()
