@@ -1,5 +1,7 @@
 import sys
 import os
+import time
+from random import uniform
 
 import pika
 
@@ -17,7 +19,9 @@ class Consumer(object):
         return pika.BlockingConnection(parameters)  # 连接本地的RabbitMQ服务器
 
     def call_back(self, ch, method, properties, body):
-        print(" [x] Received %r" % body)
+        sleep_time = uniform(0.8, 5.4)
+        print(" [x] Received %r time: %f" % (body, sleep_time))
+        time.sleep(sleep_time)
 
     def consume_message(self):
         connection = self.get_connection()
