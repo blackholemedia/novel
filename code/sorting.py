@@ -23,21 +23,32 @@ class Sorting(object):
                     self.source_list = self.source_list[:j] + [tmp] + self.source_list[j:i] + self.source_list[(i + 1):]
                     break
 
+    @custom_line_profiler
     def shell_sort(self):
-        increment = len(self.source_list) // 2
-        for i in range(len(self.source_list)):
-            tmp = i
-            while tmp < len(self.source_list):
-                tmp += increment
-                for j in range(i, tmp, increment):
-                    if tmp < self.source_list[j]:
-                        self.source_list = self.source_list[:j] + [tmp] + self.source_list[j:i] + self.source_list[(i + 1):]
+        total_length = len(self.source_list)
+        increment = total_length // 2
+        while increment > 0:
+            for i in range(increment):
+                tmp = i
+                while tmp < total_length:
+                    tmp += increment
+                    if tmp >= total_length:
                         break
+                    catch_flag = False
+                    for j in range(i, tmp + 1, increment):
+                        if catch_flag:
+                            self.source_list[j], previous = previous, self.source_list[j]
+                            continue
+                        if self.source_list[tmp] < self.source_list[j]:
+                            catch_flag = True
+                            previous = self.source_list[j]
+                            self.source_list[j] = self.source_list[tmp]
+            increment //= 2
 
 
 if __name__ == '__main__':
     sorting = Sorting()
-    sorting.generate_random_list(num=500)
-     #sorting.insert_sort()
+    sorting.generate_random_list(num=1000, print_result=False)
+    # sorting.insert_sort()
     sorting.shell_sort()
-    # print(sorting.source_list)
+    #print(sorting.source_list)
