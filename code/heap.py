@@ -11,12 +11,19 @@ class Heap(object):
     def __init__(self, array: list):
         length = len(array)
         start = length // 2
-        while start > 1:
+        while start > 0:
             for i in range(start, end):
-                if (2 * i + 1) > length:
+                if (2 * i + 1) >= length:
                     continue
-                pass
-            self.heap = ''
+                if (2 * i + 2) >= length:
+                    if array[i] > array[2 * i + 1]:
+                        array[i], array[2 * i + 1] = array[2 * i + 1], array[i]
+                else:
+                    if array[i] > min(array[1], array[2]):
+                        if array[2 * i + 1] <= array[2 * i + 1]:
+                            array[i], array[2 * i + 1] = array[2 * i + 1], array[i]
+                        else:
+                            array[i], array[2 * i + 2] = array[2 * i + 2], array[i]
 
     def up_node(self):
         pass
