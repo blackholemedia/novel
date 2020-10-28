@@ -5,8 +5,24 @@ Module docstring.
 import sys
 import getopt
 
+
 class Heap(object):
-    pass
+
+    def __init__(self, array: list):
+        length = len(array)
+        start = length // 2
+        while start > 1:
+            for i in range(start, end):
+                if (2 * i + 1) > length:
+                    continue
+                pass
+            self.heap = ''
+
+    def up_node(self):
+        pass
+
+    def down_node(self):
+        pass
 
 
 class Usage(Exception):
