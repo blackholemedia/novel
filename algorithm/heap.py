@@ -25,6 +25,15 @@ class Heap(SortingBase):
             self.down_node(i, length)
             i -= 1
 
+    def delete(self):
+        self.source_list[-1], self.source_list[0] = self.source_list[0], self.source_list[-1]
+        deleted_node, self.source_list = self.source_list[-1], self.source_list[:-1]
+        self.down_node(0, len(self.source_list))
+        return deleted_node
+
+    def add(self):
+        pass
+
     def up_node(self):
         pass
 
@@ -68,6 +77,8 @@ def main(argv=None):
         # more code, unchanged
         params = {k[0].lstrip('--'): int(k[1]) for k in opts}
         heap = Heap(array=[7, 14, 17, 12, 13, 15, 11, 5, 3, 10], **params)
+        print(heap.source_list)
+        node = heap.delete()
         print(heap.source_list)
     except Usage as err:
         print(sys.stderr, err.msg)
