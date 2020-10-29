@@ -5,54 +5,50 @@ Module docstring.
 import sys
 import getopt
 
-from .sorting import SortingBase
+from algorithm.sorting import SortingBase
 
 
 class Heap(SortingBase):
 
-    def __init__(self, array: list, **kwargs):
+    def __init__(self, array=None, **kwargs):
+        super().__init__()
         if array is not None:
             self.source_list = array
         else:
-            self.source_list = self.generate_random_list(**kwargs)
-        super().__init__()
+            self.generate_random_list(**kwargs)
         self.build_heap()
-#        length = len(array)
-#        i = length // 2 - 1
-#        while i >= 0:
-#            if (2 * i + 1) >= length:
-#                continue
-#            if (2 * i + 2) >= length:
-#                if array[i] > array[2 * i + 1]:
-#                    array[i], array[2 * i + 1] = array[2 * i + 1], array[i]
-#            else:
-#                if array[i] > min(array[1], array[2]):
-#                    if array[2 * i + 1] <= array[2 * i + 1]:
-#                        array[i], array[2 * i + 1] = array[2 * i + 1], array[i]
-#                    else:
-#                        array[i], array[2 * i + 2] = array[2 * i + 2], array[i]
 
     def build_heap(self):
         length = len(self.source_list)
         i = length // 2 - 1
         while i >= 0:
-            if (2 * i + 1) >= length:
-                continue
-            if (2 * i + 2) >= length:
-                if self.source_list[i] > self.source_list[2 * i + 1]:
-                    self.source_list[i], self.source_list[2 * i + 1] = self.source_list[2 * i + 1], self.source_list[i]
-            else:
-                if self.source_list[i] > min(self.source_list[1], self.source_list[2]):
-                    if self.source_list[2 * i + 1] <= self.source_list[2 * i + 1]:
-                        self.source_list[i], self.source_list[2 * i + 1] = self.source_list[2 * i + 1], self.source_list[i]
-                    else:
-                        self.source_list[i], self.source_list[2 * i + 2] = self.source_list[2 * i + 2], self.source_list[i]
+            self.down_node(i, length)
+            i -= 1
 
     def up_node(self):
         pass
 
-    def down_node(self):
-        pass
+    def down_node(self, p, length):
+        while True:
+            left, right = 2 * p + 1, 2 * p + 2
+            if left >= length:
+                break
+            if right >= length:
+                if self.source_list[p] > self.source_list[left]:
+                    self.source_list[p], self.source_list[left] = self.source_list[left], self.source_list[p]
+                    p = left
+                else:
+                    break
+            else:
+                if self.source_list[p] > min(self.source_list[left], self.source_list[right]):
+                    if self.source_list[left] <= self.source_list[right]:
+                        self.source_list[p], self.source_list[left] = self.source_list[left], self.source_list[p]
+                        p = left
+                    else:
+                        self.source_list[p], self.source_list[right] = self.source_list[right], self.source_list[p]
+                        p = right
+                else:
+                    break
 
 
 class Usage(Exception):
@@ -70,7 +66,9 @@ def main(argv=None):
         except getopt.error as msg:
             raise Usage(msg)
         # more code, unchanged
-        heap = Heap(**opts)
+        params = {k[0].lstrip('--'): int(k[1]) for k in opts}
+        heap = Heap(array=[7, 14, 17, 12, 13, 15, 11, 5, 3, 10], **params)
+        print(heap.source_list)
     except Usage as err:
         print(sys.stderr, err.msg)
         print(sys.stderr, "for help use --help")
