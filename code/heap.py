@@ -5,25 +5,46 @@ Module docstring.
 import sys
 import getopt
 
+from .sorting import SortingBase
 
-class Heap(object):
+
+class Heap(SortingBase):
 
     def __init__(self, array: list):
-        length = len(array)
-        start = length // 2
-        while start > 0:
-            for i in range(start, end):
-                if (2 * i + 1) >= length:
-                    continue
-                if (2 * i + 2) >= length:
-                    if array[i] > array[2 * i + 1]:
-                        array[i], array[2 * i + 1] = array[2 * i + 1], array[i]
-                else:
-                    if array[i] > min(array[1], array[2]):
-                        if array[2 * i + 1] <= array[2 * i + 1]:
-                            array[i], array[2 * i + 1] = array[2 * i + 1], array[i]
-                        else:
-                            array[i], array[2 * i + 2] = array[2 * i + 2], array[i]
+        if array is not None:
+            self.source_list = array
+        super().__init__()
+        self.build_heap()
+#        length = len(array)
+#        i = length // 2 - 1
+#        while i >= 0:
+#            if (2 * i + 1) >= length:
+#                continue
+#            if (2 * i + 2) >= length:
+#                if array[i] > array[2 * i + 1]:
+#                    array[i], array[2 * i + 1] = array[2 * i + 1], array[i]
+#            else:
+#                if array[i] > min(array[1], array[2]):
+#                    if array[2 * i + 1] <= array[2 * i + 1]:
+#                        array[i], array[2 * i + 1] = array[2 * i + 1], array[i]
+#                    else:
+#                        array[i], array[2 * i + 2] = array[2 * i + 2], array[i]
+
+    def build_heap(self):
+        length = len(self.source_list)
+        i = length // 2 - 1
+        while i >= 0:
+            if (2 * i + 1) >= length:
+                continue
+            if (2 * i + 2) >= length:
+                if self.source_list[i] > self.source_list[2 * i + 1]:
+                    self.source_list[i], self.source_list[2 * i + 1] = self.source_list[2 * i + 1], self.source_list[i]
+            else:
+                if self.source_list[i] > min(self.source_list[1], self.source_list[2]):
+                    if self.source_list[2 * i + 1] <= self.source_list[2 * i + 1]:
+                        self.source_list[i], self.source_list[2 * i + 1] = self.source_list[2 * i + 1], self.source_list[i]
+                    else:
+                        self.source_list[i], self.source_list[2 * i + 2] = self.source_list[2 * i + 2], self.source_list[i]
 
     def up_node(self):
         pass

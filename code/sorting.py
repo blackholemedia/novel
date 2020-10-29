@@ -2,7 +2,7 @@ import random
 from custom_profiler.custom_profiler import custom_line_profiler
 
 
-class Sorting(object):
+class SortingBase(object):
 
     def __init__(self):
         self.source_list = []
@@ -13,6 +13,12 @@ class Sorting(object):
         if print_result:
             print(self.source_list)
             print(sorted(self.source_list))
+
+
+class Sorting(SortingBase):
+
+    def __init__(self):
+        super().__init__()
 
     @custom_line_profiler
     def insert_sort(self):
