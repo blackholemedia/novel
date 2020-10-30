@@ -31,11 +31,18 @@ class Heap(SortingBase):
         self.down_node(0, len(self.source_list))
         return deleted_node
 
-    def add(self):
-        pass
+    def add(self, node):
+        self.source_list.append(node)
+        self.up_node(len(self.source_list) - 1)
 
-    def up_node(self):
-        pass
+    def up_node(self, p):
+        while True:
+            parent = (p - 1) // 2
+            if self.source_list[p] <= self.source_list[parent]:
+                self.source_list[p], self.source_list[parent] = self.source_list[parent], self.source_list[p]
+                p = parent
+            else:
+                break
 
     def down_node(self, p, length):
         while True:
@@ -78,7 +85,7 @@ def main(argv=None):
         params = {k[0].lstrip('--'): int(k[1]) for k in opts}
         heap = Heap(array=[7, 14, 17, 12, 13, 15, 11, 5, 3, 10], **params)
         print(heap.source_list)
-        node = heap.delete()
+        heap.add(4)
         print(heap.source_list)
     except Usage as err:
         print(sys.stderr, err.msg)
