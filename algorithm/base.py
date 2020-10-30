@@ -9,11 +9,11 @@ import random
 
 class SortingBase(object):
 
-    def __init__(self):
-        self.source_list = []
+    def __init__(self, array=None):
+        self.source_list = array if array is not None else []
         super().__init__()
 
-    def generate_random_list(self, start=0, end=100000, num=10000, print_result=False):
+    def generate_random_list(self, start=0, end=20, num=10, print_result=False):
         self.source_list = random.sample(range(start, end), num)
         if print_result:
             print(self.source_list)
