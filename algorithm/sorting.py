@@ -1,18 +1,5 @@
-import random
 from custom_profiler.custom_profiler import custom_line_profiler
-
-
-class SortingBase(object):
-
-    def __init__(self):
-        self.source_list = []
-        super().__init__()
-
-    def generate_random_list(self, start=0, end=100000, num=10000, print_result=False):
-        self.source_list = random.sample(range(start, end), num)
-        if print_result:
-            print(self.source_list)
-            print(sorted(self.source_list))
+from algorithm.base import SortingBase
 
 
 class Sorting(SortingBase):

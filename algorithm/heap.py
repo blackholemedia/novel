@@ -5,7 +5,7 @@ Module docstring.
 import sys
 import getopt
 
-from algorithm.sorting import SortingBase
+from algorithm.base import SortingBase
 
 
 class Heap(SortingBase):
