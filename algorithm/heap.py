@@ -66,6 +66,12 @@ class Heap(SortingBase):
                 else:
                     break
 
+    def heap_sort(self):
+        array = []
+        while len(self.source_list):
+            array.append(self.delete())
+        self.source_list = array
+
 
 class Usage(Exception):
     def __init__(self, msg):
@@ -83,9 +89,10 @@ def main(argv=None):
             raise Usage(msg)
         # more code, unchanged
         params = {k[0].lstrip('--'): int(k[1]) for k in opts}
-        heap = Heap(array=[7, 14, 17, 12, 13, 15, 11, 5, 3, 10], **params)
-        print(heap.source_list)
-        heap.add(4)
+        # heap = Heap(array=[7, 14, 17, 12, 13, 15, 11, 5, 3, 10], **params)
+        heap = Heap(**params)
+        # print(heap.source_list)
+        heap.heap_sort()
         print(heap.source_list)
     except Usage as err:
         print(sys.stderr, err.msg)
