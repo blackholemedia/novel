@@ -38,10 +38,40 @@ class Sorting(SortingBase):
                             self.source_list[j] = self.source_list[tmp]
             increment //= 2
 
+    def merge_sort(self):
+        return self._merge_sort(self.source_list)
+
+    def _merge_sort(self, array):
+        length = len(array)
+        if length < 2:
+            return array
+        elif length == 2:
+            return [min(array), max(array)]
+        else:
+            left = self._merge_sort(array[:(len(array) // 2)])
+            right = self._merge_sort(array[(len(array) // 2):])
+            i, j, result = 0, 0, []
+            while True:
+                if left[i] <= right[j]:
+                    result.append(left[i])
+                    i += 1
+                    if i >= len(left):
+                        result.extend(right[j:])
+                        break
+                else:
+                    result.append(right[j])
+                    j += 1
+                    if j >= len(right):
+                        result.extend(left[i:])
+                        break
+            return result
+
 
 if __name__ == '__main__':
     sorting = Sorting()
-    sorting.generate_random_list(num=1000, print_result=False)
+    sorting.generate_random_list(start=0, end=1000, num=100, print_result=True)
     # sorting.insert_sort()
-    sorting.shell_sort()
+    # sorting.shell_sort()
+    print(sorting.merge_sort())
+    pass
     #print(sorting.source_list)
