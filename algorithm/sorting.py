@@ -1,5 +1,6 @@
 from custom_profiler.custom_profiler import custom_line_profiler
 from algorithm.base import SortingBase
+from algorithm.heap import Heap
 
 
 class Sorting(SortingBase):
@@ -66,12 +67,25 @@ class Sorting(SortingBase):
                         break
             return result
 
+    def bucket_sort(self, bucket_size=10):
+        min_value, max_value = min(self.source_list), max(self.source_list)
+        buckets = [[] for i in range(max_value // bucket_size - min_value // bucket_size + 1)]
+        for i in self.source_list:
+            buckets[(i - min_value) // bucket_size].append(i)
+        self.source_list.clear()
+        for i in buckets:
+            heap = Heap(array=i)
+            heap.heap_sort()
+            self.source_list.extend(heap.source_list)
+
 
 if __name__ == '__main__':
     sorting = Sorting()
     sorting.generate_random_list(start=0, end=1000, num=100, print_result=True)
     # sorting.insert_sort()
     # sorting.shell_sort()
-    print(sorting.merge_sort())
+    # print(sorting.merge_sort())
+    sorting.bucket_sort(bucket_size=13)
+    print(sorting.source_list)
     pass
     #print(sorting.source_list)
