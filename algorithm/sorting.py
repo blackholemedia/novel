@@ -78,14 +78,30 @@ class Sorting(SortingBase):
             heap.heap_sort()
             self.source_list.extend(heap.source_list)
 
+    def bubble_sort(self):
+        length = len(self.source_list)
+        for i in range(length - 1):
+            j = 1
+            while j < length - i:
+                if self.source_list[j] < self.source_list[j - 1]:
+                    self.source_list[j], self.source_list[j - 1] = self.source_list[j - 1], self.source_list[j]
+                j += 1
+
+    def quick_sort(self):
+        return self._quick_sort(self.source_list)
+
+    def _quick_sort(self, array):
+        pass
+
 
 if __name__ == '__main__':
     sorting = Sorting()
-    sorting.generate_random_list(start=0, end=1000, num=100, print_result=True)
+    sorting.generate_random_list(start=0, end=1000, num=10, print_result=True)
     # sorting.insert_sort()
     # sorting.shell_sort()
     # print(sorting.merge_sort())
-    sorting.bucket_sort(bucket_size=13)
+    # sorting.bucket_sort(bucket_size=13)
+    sorting.bubble_sort()
     print(sorting.source_list)
     pass
     #print(sorting.source_list)
