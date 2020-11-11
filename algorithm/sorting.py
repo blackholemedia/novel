@@ -139,12 +139,19 @@ class Sorting(SortingBase):
                 j -= 1
             # exchange pivot
             if pivot == -1:
-                if i != j:
+                if array[pivot] <= array[i]:
                     array[pivot], array[i] = array[i], array[pivot]
                     pivot = i
+                else:
+                    array[pivot], array[i + 1] = array[i + 1], array[pivot]
+                    pivot = i + 1
             else:
-                array[pivot], array[j] = array[j], array[pivot]
-                pivot = j
+                if array[pivot] <= array[i]:
+                    array[pivot], array[i - 1] = array[i - 1], array[pivot]
+                    pivot = i - 1
+                else:
+                    array[pivot], array[i] = array[i], array[pivot]
+                    pivot = i
             # conquer
             array = self._quick_sort(array[:pivot]) + [array[pivot]] + self._quick_sort(array[(pivot + 1):])
             return array
@@ -152,7 +159,7 @@ class Sorting(SortingBase):
 
 if __name__ == '__main__':
     sorting = Sorting()
-    sorting.generate_random_list(start=0, end=1000, num=20, print_result=True)
+    sorting.generate_random_list(start=0, end=1000, num=100, print_result=True)
     # sorting.insert_sort()
     # sorting.shell_sort()
     # print(sorting.merge_sort())
