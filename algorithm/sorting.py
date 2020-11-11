@@ -78,6 +78,15 @@ class Sorting(SortingBase):
             heap.heap_sort()
             self.source_list.extend(heap.source_list)
 
+    def bubble_sort(self):
+        length = len(self.source_list)
+        for i in range(length - 1):
+            j = 1
+            while j < length - i:
+                if self.source_list[j] < self.source_list[j - 1]:
+                    self.source_list[j], self.source_list[j - 1] = self.source_list[j - 1], self.source_list[j]
+                j += 1
+
 
 if __name__ == '__main__':
     sorting = Sorting()
