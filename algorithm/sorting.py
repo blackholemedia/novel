@@ -88,10 +88,73 @@ class Sorting(SortingBase):
                 j += 1
 
     def quick_sort(self):
-        return self._quick_sort(self.source_list)
+        self.source_list = self._quick_sort(self.source_list)
 
     def _quick_sort(self, array):
-        pass
+        length = len(array)
+        if not length or length == 1:
+            return array
+        if length == 2:
+            if array[0] > array[1]:
+                array[0], array[1] = array[1], array[0]
+            return array
+        else:
+            middle = length // 2
+            # get middle value as pivot
+            if array[0] >= array[middle]:
+                if array[middle] >= array[-1]:
+                    pivot = middle
+                elif array[0] >= array[-1]:
+                    pivot = -1
+                else:
+                    pivot = 0
+            else:
+                if array[middle] <= array[-1]:
+                    pivot = middle
+                elif array[0] >= array[-1]:
+                    pivot = 0
+                else:
+                    pivot = -1
+            # dividend
+            if pivot == middle:
+                array[-1], array[middle] = array[middle], array[-1]
+                pivot = -1
+            if pivot == 0:
+                i, j = 1, length - 1
+            else:
+                i, j = 0, length - 2
+            while i < j:
+                if array[i] > array[pivot] > array[j]:
+                    array[i], array[j] = array[j], array[i]
+                    i += 1
+                    j -= 1
+                    continue
+                if array[i] >= array[pivot]:
+                    j -= 1
+                    continue
+                if array[pivot] >= array[j]:
+                    i += 1
+                    continue
+                i += 1
+                j -= 1
+            # exchange pivot
+            if pivot == -1:
+                if array[pivot] <= array[i]:
+                    array[pivot], array[i] = array[i], array[pivot]
+                    pivot = i
+                else:
+                    array[pivot], array[i + 1] = array[i + 1], array[pivot]
+                    pivot = i + 1
+            else:
+                if array[pivot] <= array[i]:
+                    array[pivot], array[i - 1] = array[i - 1], array[pivot]
+                    pivot = i - 1
+                else:
+                    array[pivot], array[i] = array[i], array[pivot]
+                    pivot = i
+            # conquer
+            array = self._quick_sort(array[:pivot]) + [array[pivot]] + self._quick_sort(array[(pivot + 1):])
+            return array
 
 
 if __name__ == '__main__':
@@ -101,7 +164,6 @@ if __name__ == '__main__':
     # sorting.shell_sort()
     # print(sorting.merge_sort())
     # sorting.bucket_sort(bucket_size=13)
-    sorting.bubble_sort()
+    sorting.quick_sort()
     print(sorting.source_list)
     pass
-    #print(sorting.source_list)
