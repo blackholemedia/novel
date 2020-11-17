@@ -1,36 +1,32 @@
-#-*- coding=utf-8 -*-
+# -*- coding=utf-8 -*-
 # this is for creating a binary tree from a list. The only difference with binarytree is the add_node method
-from functools import reduce
-import sys,random
-if sys.platform == 'linux':
-    sys.path.append('/home/alta/ds')
-    from mytree.binarytree import BinaryTree,TreeNode
-else:
-    sys.path.append('c:\\users\\alta')
-    from datastructure.mytree.binarytree import BinaryTree,TreeNode
+
+import random
+from algorithm.base_structure.binarytree import BinaryTree, TreeNode
+
 
 class BinaryTreeFromList(BinaryTree):
 
     def __init__(self):
         super().__init__()
 
-    def add_node(self,data, current_node=None):
-        if isinstance(data,TreeNode):
+    def add_node(self, data, current_node=None):
+        if isinstance(data, TreeNode):
             adding_item = data
         else:
-            adding_item = TreeNode(data) # check if data is TreeNode object
+            adding_item = TreeNode(data)  # check if data is TreeNode object
         if self._is_empty():
             adding_item.parent = self._header
             self._header = adding_item
         else:
-            if current_node == None:
+            if current_node is None:
                 iter_node = self._header
             else:
                 iter_node = current_node
-            if iter_node.left == None:
+            if iter_node.left is None:
                 adding_item.parent = iter_node
                 iter_node.left = adding_item
-            elif iter_node.right == None:
+            elif iter_node.right is None:
                 adding_item.parent = iter_node
                 iter_node.right = adding_item
             else:
@@ -38,28 +34,28 @@ class BinaryTreeFromList(BinaryTree):
                     self.add_node(data, iter_node.right)
                 elif iter_node.right.val == "#":
                     self.add_node(data, iter_node.left)
-                elif random.randint(0,999) % 2 == 0:
+                elif random.randint(0, 999) % 2 == 0:
                     self.add_node(data, iter_node.left)
                 else:
                     self.add_node(data, iter_node.right)
 
-    def add_node_byleft(self,data, current_node=None):
-        if isinstance(data,TreeNode):
+    def add_node_byleft(self, data, current_node=None):
+        if isinstance(data, TreeNode):
             adding_item = data
         else:
-            adding_item = TreeNode(data) # check if data is TreeNode object
+            adding_item = TreeNode(data)  # check if data is TreeNode object
         if self._is_empty():
             adding_item.parent = self._header
             self._header = adding_item
         else:
-            if current_node == None:
+            if current_node is None:
                 iter_node = self._header
             else:
                 iter_node = current_node
-            if iter_node.left == None:
+            if iter_node.left is None:
                 adding_item.parent = iter_node
                 iter_node.left = adding_item
-            elif iter_node.right == None:
+            elif iter_node.right is None:
                 adding_item.parent = iter_node
                 iter_node.right = adding_item
             else:
@@ -77,13 +73,13 @@ class BinaryTreeFromList(BinaryTree):
 
     def dec_alergic(self, root=None):
         if root:
-            if root.left == None:
+            if root.left is None:
                 pass
             elif root.left.val == '#':
                 root.left = None
             else:
                 self.dec_alergic(root.left)
-            if root.right == None:
+            if root.right is None:
                 pass
             elif root.right.val == '#':
                 root.right = None
@@ -92,6 +88,7 @@ class BinaryTreeFromList(BinaryTree):
         else:
             self.dec_alergic(self._header)
 
+
 if __name__ == '__main__':
     '''
     import random,json
@@ -99,7 +96,7 @@ if __name__ == '__main__':
         randomlist = json.loads(f.read())
     '''
     mybinarytree = BinaryTreeFromList()
-    for i in [5,4,'#',3,'#',2]:
+    for i in [5, 4, '#', 3, '#', 2]:
         mybinarytree.add_node(i)
     mybinarytree.print_all()
     mybinarytree.dec_alergic()

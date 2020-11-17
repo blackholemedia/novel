@@ -1,15 +1,8 @@
 # -*- coding=utf-8 -*-
 from functools import reduce
 import sys
-
-if sys.platform == 'linux':
-    sys.path.append('/home/alta/ds')
-    from mylinkedlist.listnode import ListNode, Node
-    from mystack.stack import CreateStack
-else:
-    sys.path.append('c:\\users\\alta')
-    from datastructure.mylinkedlist.listnode import ListNode, Node
-    from datastructure.mystack.stack import CreateStack
+from algorithm.base_structure.listnode import ListNode, Node
+from algorithm.base_structure.stack import CreateStack
 
 
 class TreeNode(Node):

@@ -1,28 +1,22 @@
-#-*- coding=utf-8 -*-
-from functools import reduce
-import sys
-if sys.platform == 'linux':
-    sys.path.append('/home/alta/ds')
-    from mytree.binarytree import BinaryTree,TreeNode
-else:
-    sys.path.append('c:\\users\\alta')
-    from datastructure.mytree.binarytree import BinaryTree,TreeNode
+# -*- coding=utf-8 -*-
+from algorithm.base_structure.binarytree import BinaryTree, TreeNode
+
 
 class SearchTree(BinaryTree):
 
     def __init__(self):
         super().__init__()
 
-    def add_node(self,data, current_node=None):
-        if isinstance(data,TreeNode):
+    def add_node(self, data, current_node=None):
+        if isinstance(data, TreeNode):
             adding_item = data
         else:
-            adding_item = TreeNode(data) # check if data is TreeNode object
+            adding_item = TreeNode(data)  # check if data is TreeNode object
         if self._is_empty():
             adding_item.parent = self._header
             self._header = adding_item
         else:
-            if current_node == None:
+            if current_node is None:
                 iter_node = self._header
             else:
                 iter_node = current_node
@@ -30,7 +24,7 @@ class SearchTree(BinaryTree):
                 print('the data already exist')
             elif data > iter_node.val:
                 if iter_node.right:
-                    self.add_node(data,iter_node.right)
+                    self.add_node(data, iter_node.right)
                 else:
                     adding_item.parent = iter_node
                     iter_node.right = adding_item
@@ -41,9 +35,11 @@ class SearchTree(BinaryTree):
                     adding_item.parent = iter_node
                     iter_node.left = adding_item
 
+
 if __name__ == '__main__':
-    import random,json
-    with open("randomlist","r",encoding='utf-8') as f:
+    import random, json
+
+    with open("randomlist", "r", encoding='utf-8') as f:
         randomlist = json.loads(f.read())
     mysearchtree = SearchTree()
     for i in randomlist:

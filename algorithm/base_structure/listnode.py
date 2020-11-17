@@ -1,13 +1,15 @@
-#-*- coding=utf-8 -*-
+# -*- coding=utf-8 -*-
+
 
 class Node(object):
 
-    def __init__(self,item=None,pos_item=None):
+    def __init__(self, item=None, pos_item=None):
         self._item = item
         self._pos_item = pos_item
 
     def __repr__(self):
         return str(self._item)
+
 
 class ListNode(object):
 
@@ -20,16 +22,16 @@ class ListNode(object):
         return self._header
 
     def _is_empty(self):
-        return self._header == None
+        return self._header is None
 
-    def add_node(self,nextnode):
-        if isinstance(nextnode,Node):
+    def add_node(self, nextnode):
+        if isinstance(nextnode, Node):
             adding_item = nextnode
         else:
-            adding_item = Node(nextnode) # check if nextnode is Node object
+            adding_item = Node(nextnode)  # check if nextnode is Node object
 
-        if self._header == None:
-            self._header = adding_item 
+        if self._header is None:
+            self._header = adding_item
             self.__length += 1
         else:
             iter_node = self._header
@@ -38,7 +40,7 @@ class ListNode(object):
             iter_node._pos_item = adding_item
             self.__length += 1
 
-    def del_node(self,index):
+    def del_node(self, index):
         iter_node = self._header
         iter_index = 1
         if 1 == index:
@@ -47,14 +49,14 @@ class ListNode(object):
         elif index > self.__length:
             print('Index out of range')
         else:
-            while iter_index < index-1:
+            while iter_index < index - 1:
                 iter_node = iter_node._pos_item
                 iter_index += 1
             iter_node._pos_item = iter_node._pos_item._pos_item
             self.__length -= 1
 
-    def insert_node(self,index,data):
-        if index < 1 or index > self.__length+1:
+    def insert_node(self, index, data):
+        if index < 1 or index > self.__length + 1:
             print('Index out of range')
         elif index == 1:
             node = Node(data)
@@ -65,14 +67,14 @@ class ListNode(object):
             iter_node = self._header
             node = Node(data)
             iter_index = 1
-            while iter_index < index-1:
+            while iter_index < index - 1:
                 iter_node = iter_node._pos_item
                 iter_index += 1
             node._pos_item = iter_node._pos_item
             iter_node._pos_item = node
             self.__length += 1
 
-    def update(self,index,data):
+    def update(self, index, data):
         if index < 0 or index > self.__length:
             print('Index out of range')
         else:
@@ -83,7 +85,7 @@ class ListNode(object):
                 iter_index += 1
             iter_node._item = data
 
-    def get_item(self,index):
+    def get_item(self, index):
         if index < 0 or index > self.__length:
             print('Index out of range')
         else:
@@ -94,7 +96,7 @@ class ListNode(object):
                 iter_index += 1
             return iter_node._item
 
-    def get_index(self,data):
+    def get_index(self, data):
         iter_node = self._header
         iter_index = 1
         while iter_node:
@@ -116,12 +118,11 @@ class ListNode(object):
         else:
             iter_node = self._header
             nlist = ''
-            while iter_node._pos_item != None:
+            while iter_node._pos_item is not None:
                 nlist += str(iter_node._item)
                 iter_node = iter_node._pos_item
             nlist += str(iter_node._item)
         return nlist
-
 
 
 if __name__ == '__main__':
@@ -135,5 +136,5 @@ if __name__ == '__main__':
     print(mylist,mylist.__length)
     print(mylist.get_index(7))
     '''
-    i = Node(2,7)
+    i = Node(2, 7)
     print(i)

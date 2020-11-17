@@ -1,12 +1,7 @@
-#-*- coding=utf-8 -*-
+# -*- coding=utf-8 -*-
 
-import sys
-if sys.platform == 'linux':
-    sys.path.append('/home/alta/ds')
-    from mylinkedlist.listnode import ListNode,Node
-else:
-    sys.path.append('c:\\users\\alta')
-    from datastructure.mylinkedlist.listnode import ListNode,Node
+from algorithm.base_structure.listnode import ListNode, Node
+
 
 class CreateStack(ListNode):
 
@@ -19,8 +14,8 @@ class CreateStack(ListNode):
         else:
             return self._header._item
 
-    def push(self,data):
-        self.insert_node(1,data)
+    def push(self, data):
+        self.insert_node(1, data)
 
     def pop(self):
         if self._is_empty():
@@ -33,6 +28,7 @@ class CreateStack(ListNode):
             return 'The stack is empty!'
         else:
             return self._header
+
 
 if __name__ == '__main__':
     mystack = CreateStack()

@@ -1,13 +1,7 @@
 # -*- coding=utf-8 -*-
 from functools import reduce
-import sys, random
 
-if sys.platform == 'linux':
-    sys.path.append('/home/alta/ds')
-    from mytree.tree import CreateTree
-else:
-    sys.path.append('c:\\users\\alta')
-    from datastructure.mytree.tree import CreateTree
+from algorithm.base_structure.mytree import CreateTree
 
 
 class TreeNode(object):
@@ -112,7 +106,7 @@ class BinaryTree(CreateTree):
                     print('Delete item %d success!' % iter_node.val)
                     iter_node.parent.left = None
                     iter_node.parent.right = None
-                elif iter_node.left != None and iter_node.right != None:
+                elif iter_node.left is not None and iter_node.right is not None:
                     exchange_node = self.findmin(current_node=iter_node.right)
                     print(exchange_node)
                     iter_node.val = exchange_node.val
@@ -175,9 +169,9 @@ class BinaryTree(CreateTree):
             if iter_node.left and iter_node.right:
                 self.print_all(iter_node.right, node_depth + 1)
                 self.print_all(iter_node.left, node_depth + 1)
-            elif iter_node.left != None:
+            elif iter_node.left is not None:
                 self.print_all(iter_node.left, node_depth + 1)
-            elif iter_node.right != None:
+            elif iter_node.right is not None:
                 self.print_all(iter_node.right, node_depth + 1)
             else:
                 return None

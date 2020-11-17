@@ -1,5 +1,6 @@
-#-*- coding=utf-8 -*-
-from tree import CreateTree
+# -*- coding=utf-8 -*-
+
+from algorithm.base_structure.mytree import CreateTree
 
 if __name__ == '__main__':
     p1 = CreateTree()

@@ -1,10 +1,7 @@
-#-*- coding=utf-8 -*-
+# -*- coding=utf-8 -*-
 
-import sys
-sys.path.append('/home/alta/ds')
-from mylinkedlist.listnode import ListNode,Node
-# sys.path.append('c:\\users\\alta')
-# from datastructure.mylinkedlist.listnode import ListNode,Node
+from algorithm.base_structure.listnode import ListNode, Node
+
 
 class CreateQueue(ListNode):
 
@@ -17,8 +14,8 @@ class CreateQueue(ListNode):
         else:
             return self._header._item
 
-    def enqueue(self,data):
-        self.insert_node(self._length+1,data)
+    def enqueue(self, data):
+        self.insert_node(self._length + 1, data)
 
     def dequeue(self):
         if self._is_empty():
@@ -31,6 +28,7 @@ class CreateQueue(ListNode):
             return 'The queue is empty!'
         else:
             return self._header
+
 
 if __name__ == '__main__':
     mystack = CreateQueue()

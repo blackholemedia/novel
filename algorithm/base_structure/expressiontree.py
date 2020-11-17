@@ -1,14 +1,14 @@
-#-*- coding=utf-8 -*-
+# -*- coding=utf-8 -*-
 
-import sys
-sys.path.append('c:\\users\\alta')
-from datastructure.mylinkedlist.listnode import ListNode,Node
-from datastructure.mystack.stack import CreateStack
+from algorithm.base_structure.listnode import ListNode, Node
+from algorithm.base_structure.stack import CreateStack
+
 
 class TreeNode(Node):
-    def __init__(self,item=None, firstchild=None, pos_item=None):
-        super().__init__(item,pos_item)
+    def __init__(self, item=None, firstchild=None, pos_item=None):
+        super().__init__(item, pos_item)
         self._firstchild = firstchild
+
 
 class CreateTree(ListNode):
 
@@ -22,8 +22,8 @@ class CreateTree(ListNode):
         else:
             return self._header._item
 
-    def enqueue(self,data):
-        self.insert_node(self._length+1,data)
+    def enqueue(self, data):
+        self.insert_node(self._length + 1, data)
 
     def dequeue(self):
         if self._is_empty():
@@ -36,6 +36,7 @@ class CreateTree(ListNode):
             return 'The queue is empty!'
         else:
             return self._header
+
 
 if __name__ == '__main__':
     mystack = CreateQueue()

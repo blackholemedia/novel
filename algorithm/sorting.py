@@ -1,6 +1,6 @@
 from custom_profiler.custom_profiler import custom_line_profiler
 from algorithm.base import SortingBase
-from algorithm.heap import Heap
+from algorithm.base_structure.heap import Heap
 
 
 class Sorting(SortingBase):
