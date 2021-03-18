@@ -24,7 +24,7 @@ class CreateStack(ListNode):
             self.del_node(1)
 
     def __repr__(self):
-        if self._header == None:
+        if self._header is None:
             return 'The stack is empty!'
         else:
             return self._header
