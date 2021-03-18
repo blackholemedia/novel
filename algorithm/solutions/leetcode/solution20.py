@@ -4,6 +4,7 @@ Module docstring.
 
 import sys
 import getopt
+
 from algorithm.solutions.stack import Stack
 
 
@@ -19,6 +20,10 @@ def main(argv=None):
         try:
             opts, args = getopt.getopt(argv[1:], "ho:", ["help", "output="])  # short: h means switch, o means argument
             # required; long: help means switch, output means argument required
+            s = Solution()
+            string = '([)]'
+            print(s.isValid(string))
+
         except getopt.error as msg:
             raise Usage(msg)
         # more code, unchanged
