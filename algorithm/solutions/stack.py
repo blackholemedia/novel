@@ -25,7 +25,7 @@ class Stack(object):
         if self.is_empty():
             print('The Stack is empty. No element to pop!')
         else:
-            self.stack.pop()
+            return self.stack.pop()
 
     def __repr__(self):
         if self.is_empty():
