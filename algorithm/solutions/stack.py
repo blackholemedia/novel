@@ -1,6 +1,12 @@
 # -*- coding=utf-8 -*-
 
 
+class ListNode(object):
+    def __init__(self, val=0, post=None):
+        self.val = val
+        self.post = post
+
+
 class Stack(object):
 
     def __init__(self):
