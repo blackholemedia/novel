@@ -22,9 +22,9 @@ def main(argv=None):
             opts, args = getopt.getopt(argv[1:], "ho:", ["help", "output="])  # short: h means switch, o means argument
             # required; long: help means switch, output means argument required
             s = Solution()
-            string = '([)]'
+            string = [2,7,9,3,1]
             start = time.time()
-            print(s.isValid(string))
+            print(s.rob(string))
             end = time.time()
             print(end-start)
 
@@ -38,34 +38,18 @@ def main(argv=None):
 
 
 class Solution:
-
-    def isValid(self, s: str) -> bool:
-        my_stack = Stack()
-        for i in s:
-            if my_stack.is_empty():
-                my_stack.push(i)
-            else:
-                if self.match(my_stack.top(), i):
-                    my_stack.pop()
-                else:
-                    my_stack.push(i)
-        if my_stack.is_empty():
-            return True
-        else:
-            return False
-
-    def __init__(self):
-        self._mapping = {
-            '{': '}',
-            '(': ')',
-            '[': ']',
-        }
-
-    def match(self, a, b):
-        if b == self._mapping.get(a):
-            return True
-        else:
-            return False
+    def rob(self, nums: list) -> int:
+        length = len(nums)
+        if length == 0:
+            return 0
+        if length == 1:
+            return nums[0]
+        dp = [0] * length
+        dp[0] = nums[0]
+        dp[1] = max(nums[:2])
+        for i in range(2, length):
+            dp[i] = max(nums[i] + dp[i-2], dp[i-1])
+        return dp[-1]
 
 
 if __name__ == "__main__":
