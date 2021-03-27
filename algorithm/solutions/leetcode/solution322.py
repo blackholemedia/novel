@@ -24,7 +24,7 @@ def main(argv=None):
             s = Solution()
             n = 34
             start = time.time()
-            print(s.numSquares(n))
+            print(s.coinChange(n))
             print(time.time() - start)
 
         except getopt.error as msg:
@@ -37,17 +37,17 @@ def main(argv=None):
 
 
 class Solution:
-    def numSquares(self, n: int) -> int:
-        dp = [9999999999] * (n + 1)
+    def coinChange(self, coins: list, amount: int) -> int:
+        if amount == 0:
+            return 0
+        dp = [99999] * (amount + 1)
         dp[0] = 0
-        dp[1] = 1
-        squares = [i ** 2 for i in range(1, int(n ** 0.5) + 1)]
-        for i in range(2, n + 1):
-            for square in squares:
-                if square > i:
-                    break
-                dp[i] = min(dp[i], dp[i - square] + 1)
-        return dp[-1]
+        for i in range(1, amount + 1):
+            for coin in coins:
+                if coin > i:
+                    continue
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+        return dp[-1] if dp[-1] != 99999 else -1
 
 
 if __name__ == "__main__":
