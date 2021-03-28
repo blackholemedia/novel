@@ -6,6 +6,14 @@ class ListNode(object):
         self.val = val
         self.post = post
 
+    def return_in_array(self):
+        result = []
+        head = self
+        while head:
+            result.append(head.val)
+            head = head.post
+        return result
+
 
 class Stack(object):
 
